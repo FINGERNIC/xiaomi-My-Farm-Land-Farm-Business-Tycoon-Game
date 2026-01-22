@@ -1,187 +1,103 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>My Farm Land Farm Business Tycoon Game</title>
-  <link rel="shortcut icon" href="TemplateData/favicon.png">
-  <link rel="stylesheet" href="TemplateData/style.css">
-  <link rel="manifest" href="manifest.webmanifest">
-
-  <!-- Xiaomi Games SDK -->
-  <!-- IMPROTANT: Replace the src below with your UNIQUE SDK URL from the Xiaomi Dashboard -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=capub-7151632855683728"
-    crossorigin="anonymous"></script>
-  <script>
-    // Notify SDK that load has started
-    if (typeof funmax !== 'undefined') {
-      console.log("Xiaomi SDK: funmax.loadStart() calling...");
-      funmax.loadStart();
-    }
-  </script>
-</head>
-
-<body>
-  <div id="unity-container">
-    <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-    <div id="unity-loading-bar">
-      <div id="unity-logo"></div>
-      <div id="unity-progress-bar-empty">
-        <div id="unity-progress-bar-full"></div>
-      </div>
-    </div>
-    <div id="unity-warning"> </div>
-  </div>
-  <script>
-    console.log("DEBUG: Script Starting...");
-
-    window.addEventListener("load", function () {
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("ServiceWorker.js");
-      }
-    });
-
-    var container = document.querySelector("#unity-container");
-    var canvas = document.querySelector("#unity-canvas");
-    var loadingBar = document.querySelector("#unity-loading-bar");
-    var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    var warningBanner = document.querySelector("#unity-warning");
-
-    // Shows a temporary message banner/ribbon for a few seconds, or
-    // a permanent error message on top of the canvas if type=='error'.
-    // If type=='warning', a yellow highlight color is used.
-    // Modify or remove this function to customize the visually presented
-    // way that non-critical warnings and error messages are presented to the
-    // user.
-    function unityShowBanner(msg, type) {
-      function updateBannerVisibility() {
-        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-      }
-      var div = document.createElement('div');
-      div.innerHTML = msg;
-      warningBanner.appendChild(div);
-      if (type == 'error') div.style = 'background: red; padding: 10px;';
-      else {
-        if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-        setTimeout(function () {
-          warningBanner.removeChild(div);
-          updateBannerVisibility();
-        }, 5000);
-      }
-      updateBannerVisibility();
-    }
-
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/MyHappyFarmLandSimulator.loader.js";
-    var config = {
-      dataUrl: buildUrl + "/MyHappyFarmLandSimulator.data",
-      frameworkUrl: buildUrl + "/MyHappyFarmLandSimulator.framework.js",
-      codeUrl: buildUrl + "/MyHappyFarmLandSimulator.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "FingerNic",
-      productName: "My Farm Land Farm Business Tycoon Game",
-      productVersion: "1.0",
-      showBanner: unityShowBanner,
-    };
-
-    // By default Unity keeps WebGL canvas render target size matched with
-    // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-    // Set this to false if you want to decouple this synchronization from
-    // happening inside the engine, and you would instead like to size up
-    // the canvas DOM size and WebGL render target sizes yourself.
-    // config.matchWebGLToCanvasSize = false;
-
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      // Mobile device style: fill the whole browser client area with the game canvas:
-      var meta = document.createElement('meta');
-      meta.name = 'viewport';
-      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-      document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-
-    loadingBar.style.display = "block";
-
-    // --- KOIKING BANNER START ---
-    var bannerDiv = document.createElement("div");
-    bannerDiv.style.position = "absolute";
-    bannerDiv.style.top = "0px"; // MOVED TO TOP
-    bannerDiv.style.width = "100%";
-    bannerDiv.style.zIndex = "9999";
-    bannerDiv.style.textAlign = "center";
-    bannerDiv.style.pointerEvents = "none";
-
-    // DEBUG: Removed visual background for production feel
-    // bannerDiv.style.background = "rgba(255, 0, 0, 0.5)"; 
-    // bannerDiv.style.minHeight = "100px"; 
-
-    // Allow pointer events on the actual ad content
-    bannerDiv.innerHTML = `
-        <div style="pointer-events: auto; display: block; width: 100%;">
-            <!-- koiking_banner -->
-            <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-7151632855683728"
-            data-ad-slot="2326020287"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>My Farm Land Farm Business Tycoon Game</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
         </div>
-      `;
-    document.body.appendChild(bannerDiv);
-
-    // Load AdSense Script
-    var adScript = document.createElement("script");
-    adScript.async = true;
-    adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7151632855683728";
-    adScript.setAttribute("crossorigin", "anonymous");
-
-    // Initialize Ads (Assign callbacks BEFORE appending)
-    adScript.onload = function () {
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        console.log("AdSense push called");
-      } catch (e) {
-        console.error("AdSense Error:", e);
-      }
-    };
-
-    adScript.onerror = function () {
-      console.error("AdSense Script Failed to Load! (Likely AdBlock or Network Issue)");
-    };
-
-    document.body.appendChild(adScript);
-    // --- KOIKING BANNER END ---
-
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-      createUnityInstance(canvas, config, (progress) => {
-        progressBarFull.style.width = 100 * progress + "%";
-      }).then((unityInstance) => {
-        loadingBar.style.display = "none";
-
-        console.log("Unity Instance Loaded successfully.");
-
-        // Test LoadReady call for Xiaomi SDK
-        if (typeof funmax !== 'undefined') {
-          console.log("Xiaomi SDK: Calling loadReady from index.html (Test Mode)");
-          funmax.loadReady();
-        } else {
-          console.warn("Xiaomi SDK: 'funmax' object is undefined. Did you replace the SDK URL in the <head>?");
-          console.log("Creating mock 'funmax' for testing logs...");
-          // Create a mock so we can verify the call would happen
-          window.funmax = {
-            loadReady: function () { console.log("Mock funmax.loadReady() called!"); },
-            loadStart: function () { console.log("Mock funmax.loadStart() called!"); }
-          };
-          window.funmax.loadReady();
+      </div>
+      <div id="unity-warning"> </div>
+    </div>
+    <script>
+      window.addEventListener("load", function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("ServiceWorker.js");
         }
-      }).catch((message) => {
-        alert(message);
       });
-    };
-    document.body.appendChild(script);
-  </script>
-</body>
 
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/MyHappyFarmLandSimulator.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/MyHappyFarmLandSimulator.data",
+        frameworkUrl: buildUrl + "/MyHappyFarmLandSimulator.framework.js",
+        codeUrl: buildUrl + "/MyHappyFarmLandSimulator.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "FingerNic",
+        productName: "My Farm Land Farm Business Tycoon Game",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
 </html>
